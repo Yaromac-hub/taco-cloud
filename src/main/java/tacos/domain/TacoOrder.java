@@ -4,10 +4,16 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class TacoOrder {
+public class TacoOrder implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private Long id;
+	private Date placedAt;
 
 	@NotBlank(message="Delivery name is required")
 	private String deliveryName;
@@ -39,6 +45,20 @@ public class TacoOrder {
 	public TacoOrder(String deliveryName, String deliveryStreet, String deliveryCity, String deliveryState,
 			String deliveryZip, String ccNumber, String ccExpiration, String ccCVV, List<Taco> tacos) {
 		super();
+		this.deliveryName = deliveryName;
+		this.deliveryStreet = deliveryStreet;
+		this.deliveryCity = deliveryCity;
+		this.deliveryState = deliveryState;
+		this.deliveryZip = deliveryZip;
+		this.ccNumber = ccNumber;
+		this.ccExpiration = ccExpiration;
+		this.ccCVV = ccCVV;
+		this.tacos = tacos;
+	}
+
+	public TacoOrder(Long id, Date placedAt, String deliveryName, String deliveryStreet, String deliveryCity, String deliveryState, String deliveryZip, String ccNumber, String ccExpiration, String ccCVV, List<Taco> tacos) {
+		this.id = id;
+		this.placedAt = placedAt;
 		this.deliveryName = deliveryName;
 		this.deliveryStreet = deliveryStreet;
 		this.deliveryCity = deliveryCity;
@@ -108,7 +128,18 @@ public class TacoOrder {
 	public void setTacos(List<Taco> tacos) {
 		this.tacos = tacos;
 	}
-	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Date getPlacedAt() {
+		return placedAt;
+	}
+	public void setPlacedAt(Date placedAt) {
+		this.placedAt = placedAt;
+	}
 	
 	
 }
